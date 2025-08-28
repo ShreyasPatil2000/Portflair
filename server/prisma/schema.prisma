@@ -1,0 +1,45 @@
+generator client {
+    provider = "prisma-client-js"
+    output   = "../generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+    // uncomment next line if you use Prisma <5.10
+    // directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model User {
+    id        String    @id @default(cuid())
+    name      String
+    email     String    @unique
+    password  String // hashed
+    bio       String?
+    avatarUrl String?
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    projects  Project[]
+    comments  Comment[]
+}
+
+model Project {
+    id          String    @id @default(cuid())
+    title       String
+    description String
+    link        String?
+    createdAt   DateTime  @default(now())
+    authorId    String
+    author      User      @relation(fields: [authorId], references: [id])
+    comments    Comment[]
+}
+
+model Comment {
+    id        String   @id @default(cuid())
+    content   String
+    createdAt DateTime @default(now())
+    projectId String
+    project   Project  @relation(fields: [projectId], references: [id])
+    authorId  String
+    author    User     @relation(fields: [authorId], references: [id])
+}

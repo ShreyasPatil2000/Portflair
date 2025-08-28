@@ -1,0 +1,64 @@
+import { useUser } from "@/Context/UserContext";
+import { User } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import { LOGOUT_ROUTE } from "@/utils/constants";
+import apiClient from "@/lib/api";
+import { useEffect } from "react";
+
+const UserMenu = () => {
+  const { user, setUser } = useUser();
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!user) {
+      navigate("/auth");
+    }
+  }, [user, navigate]);
+
+  const handleLogout = async () => {
+    try {
+      const response = await apiClient.post(LOGOUT_ROUTE, {}, { withCredentials: true });
+      if (response.status === 200) {
+        navigate("/auth");
+        setUser(null);
+      }
+    } catch (error) {
+      console.error("Auth error: ", error);
+    }
+  };
+
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="flex items-center space-x-4" asChild>
+        <Button
+          variant="default"
+          className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center cursor-pointer"
+        >
+          <User className="w-5 h-5" />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="w-45" align="start">
+        <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuItem className="cursor-pointer">Profile</DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer">Projects</DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>
+          Log out
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
+export default UserMenu;
