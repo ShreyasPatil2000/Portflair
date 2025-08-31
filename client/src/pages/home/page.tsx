@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import Navbar from "@/component/Navbar/page";
 import { Button } from "@/components/ui/button";
+import Footer from "@/component/Footer/page";
 
 const HomePage = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -203,11 +204,12 @@ const HomePage = () => {
 
         {/* Load More Button */}
         <div className="text-center mt-8">
-          <button className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 text-white px-8 py-3 rounded-lg hover:bg-slate-700/50 transition-all duration-200">
+          <button className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 text-white px-8 py-3 rounded-lg hover:bg-slate-700/50 transition-all duration-200 cursor-pointer">
             Load More Projects
           </button>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };
