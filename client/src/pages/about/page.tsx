@@ -13,8 +13,8 @@ const About = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center mb-6">
-            <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center">
-              <BookOpen className="w-8 h-8 text-white" />
+            <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center" title="Home" onClick={() => navigate("/")}>
+              <BookOpen className="w-8 h-8 text-white cursor-pointer" />
             </div>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">About Portflair</h1>

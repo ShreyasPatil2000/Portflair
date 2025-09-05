@@ -49,8 +49,19 @@ const UserMenu = () => {
       <DropdownMenuContent className="w-45" align="start">
         <DropdownMenuLabel>{user?.name}</DropdownMenuLabel>
         <DropdownMenuGroup>
-          <DropdownMenuItem className="cursor-pointer">Profile</DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer" onClick={() => navigate("/profile/:[userId]")}>
+            Profile
+          </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer">Projects</DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem className="cursor-pointer" onClick={() => navigate("/about")}>
+            About
+          </DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer" onClick={() => navigate("/contact")}>
+            Contact
+          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="cursor-pointer" onClick={handleLogout}>

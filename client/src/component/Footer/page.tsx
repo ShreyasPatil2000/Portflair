@@ -57,7 +57,7 @@ const Footer = () => {
               </li>
               <li>
                 <button
-                  onClick={() => navigate("/profile")}
+                  onClick={() => navigate("/profile/:[userId]")}
                   className="text-slate-400 hover:text-purple-400 transition-colors text-sm cursor-pointer"
                 >
                   Profile

@@ -2,10 +2,10 @@ import Footer from "@/component/Footer/page";
 import Navbar from "@/component/Navbar/page";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -47,7 +47,7 @@ const Contact = () => {
             <div className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8 mb-8">
               <h2 className="text-2xl font-bold text-white mb-6">Get in Touch</h2>
 
-              <div className="space-y-6">
+              <div className="space-y-9">
                 <div className="flex items-center">
                   <div className="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mr-4">
                     <Mail className="w-6 h-6 text-purple-400" />
@@ -87,7 +87,7 @@ const Contact = () => {
             {/* FAQ Section */}
             <div className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8">
               <h3 className="text-xl font-bold text-white mb-4">Quick Questions?</h3>
-              <div className="space-y-4">
+              <div className="space-y-8">
                 <div>
                   <h4 className="text-purple-400 font-medium">General Support</h4>
                   <p className="text-slate-400 text-sm">For account issues and general help</p>
