@@ -1,6 +1,19 @@
-import { useState } from 'react';
-import { Edit, MapPin, Calendar, ExternalLink, MessageCircle, Plus, Mail, Github, Globe, Users, BookOpen } from 'lucide-react';
-import Navbar from '@/component/Navbar/page';
+import { useState } from "react";
+import {
+  Edit,
+  MapPin,
+  Calendar,
+  ExternalLink,
+  MessageCircle,
+  Plus,
+  Mail,
+  Github,
+  Globe,
+  Users,
+  BookOpen,
+} from "lucide-react";
+import Navbar from "@/component/Navbar/page";
+import Footer from "@/component/Footer/page";
 
 interface User {
   id: string;
@@ -26,7 +39,7 @@ interface Project {
 }
 
 const Profile = () => {
-  const [activeTab, setActiveTab] = useState('projects');
+  const [activeTab, setActiveTab] = useState("projects");
   const [isEditing, setIsEditing] = useState(false);
 
   // Mock user data - replace with actual data from your backend
@@ -38,7 +51,7 @@ const Profile = () => {
     createdAt: "2024-01-15T10:00:00Z",
     location: "San Francisco, CA",
     website: "https://sarahchen.dev",
-    github: "https://github.com/sarahchen"
+    github: "https://github.com/sarahchen",
   };
 
   // Mock projects data - replace with actual API call
@@ -46,10 +59,11 @@ const Profile = () => {
     {
       id: "1",
       title: "E-commerce Dashboard",
-      description: "A modern React dashboard for managing online stores with real-time analytics and inventory management.",
+      description:
+        "A modern React dashboard for managing online stores with real-time analytics and inventory management.",
       link: "https://demo.example.com",
       createdAt: "2024-07-20T10:00:00Z",
-      _count: { comments: 8 }
+      _count: { comments: 8 },
     },
     {
       id: "2",
@@ -57,21 +71,25 @@ const Profile = () => {
       description: "Beautiful weather application with location-based forecasts and interactive maps.",
       link: "https://weather-app.example.com",
       createdAt: "2024-07-10T14:00:00Z",
-      _count: { comments: 5 }
+      _count: { comments: 5 },
     },
     {
       id: "3",
       title: "Task Management Tool",
       description: "Collaborative task management application with real-time updates and team features.",
       createdAt: "2024-06-25T09:00:00Z",
-      _count: { comments: 12 }
-    }
+      _count: { comments: 12 },
+    },
   ];
 
   const stats = [
     { label: "Projects", value: userProjects.length.toString(), icon: BookOpen },
-    { label: "Total Comments", value: userProjects.reduce((acc, p) => acc + p._count.comments, 0).toString(), icon: MessageCircle },
-    { label: "Member Since", value: "2024", icon: Calendar }
+    {
+      label: "Total Comments",
+      value: userProjects.reduce((acc, p) => acc + p._count.comments, 0).toString(),
+      icon: MessageCircle,
+    },
+    { label: "Member Since", value: "2024", icon: Calendar },
   ];
 
   // Helper function to format date
@@ -80,22 +98,26 @@ const Profile = () => {
     const now = new Date();
     const diffTime = Math.abs(now.getTime() - date.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
-    if (diffDays === 1) return '1 day ago';
+
+    if (diffDays === 1) return "1 day ago";
     if (diffDays < 7) return `${diffDays} days ago`;
     if (diffDays < 30) return `${Math.ceil(diffDays / 7)} weeks ago`;
     return `${Math.ceil(diffDays / 30)} months ago`;
   };
 
   const formatJoinDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', { 
-      month: 'long', 
-      year: 'numeric' 
+    return new Date(dateString).toLocaleDateString("en-US", {
+      month: "long",
+      year: "numeric",
     });
   };
 
   const getInitials = (name: string) => {
-    return name.split(' ').map(n => n[0]).join('').toUpperCase();
+    return name
+      .split(" ")
+      .map((n) => n[0])
+      .join("")
+      .toUpperCase();
   };
 
   return (
@@ -117,14 +139,12 @@ const Profile = () => {
                   getInitials(user.name)
                 )}
               </div>
-              
+
               {/* User Info */}
               <div>
                 <h1 className="text-3xl font-bold text-white mb-2">{user.name}</h1>
-                {user.bio && (
-                  <p className="text-slate-400 mb-4 max-w-2xl">{user.bio}</p>
-                )}
-                
+                {user.bio && <p className="text-slate-400 mb-4 max-w-2xl">{user.bio}</p>}
+
                 {/* User Details */}
                 <div className="flex flex-wrap items-center gap-4 text-slate-400">
                   <div className="flex items-center">
@@ -146,12 +166,24 @@ const Profile = () => {
                 {/* Social Links */}
                 <div className="flex items-center gap-4 mt-4">
                   {user.website && (
-                    <a title="Personal Website" href={user.website} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-purple-400 transition-colors">
+                    <a
+                      title="Personal Website"
+                      href={user.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-400 hover:text-purple-400 transition-colors"
+                    >
                       <Globe className="w-5 h-5" />
                     </a>
                   )}
                   {user.github && (
-                    <a title="GitHub Profile" href={user.github} target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-purple-400 transition-colors">
+                    <a
+                      title="GitHub Profile"
+                      href={user.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-400 hover:text-purple-400 transition-colors"
+                    >
                       <Github className="w-5 h-5" />
                     </a>
                   )}
@@ -161,7 +193,7 @@ const Profile = () => {
 
             {/* Action Buttons */}
             <div className="flex flex-col sm:flex-row gap-3">
-              <button 
+              <button
                 onClick={() => setIsEditing(!isEditing)}
                 className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-lg font-medium hover:from-purple-600 hover:to-pink-600 transition-all duration-200 flex items-center cursor-pointer"
               >
@@ -197,22 +229,22 @@ const Profile = () => {
         <div className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-xl overflow-hidden">
           {/* Tab Headers */}
           <div className="flex border-b border-slate-700/50">
-            <button 
-              onClick={() => setActiveTab('projects')}
+            <button
+              onClick={() => setActiveTab("projects")}
               className={`flex-1 px-6 py-4 text-sm font-medium transition-colors cursor-pointer ${
-                activeTab === 'projects' 
-                  ? 'text-purple-400 bg-purple-400/10 border-b-2 border-purple-400' 
-                  : 'text-slate-400 hover:text-white'
+                activeTab === "projects"
+                  ? "text-purple-400 bg-purple-400/10 border-b-2 border-purple-400"
+                  : "text-slate-400 hover:text-white"
               }`}
             >
               Projects ({userProjects.length})
             </button>
-            <button 
-              onClick={() => setActiveTab('activity')}
+            <button
+              onClick={() => setActiveTab("activity")}
               className={`flex-1 px-6 py-4 text-sm font-medium transition-colors cursor-pointer ${
-                activeTab === 'activity' 
-                  ? 'text-purple-400 bg-purple-400/10 border-b-2 border-purple-400' 
-                  : 'text-slate-400 hover:text-white'
+                activeTab === "activity"
+                  ? "text-purple-400 bg-purple-400/10 border-b-2 border-purple-400"
+                  : "text-slate-400 hover:text-white"
               }`}
             >
               Comments
@@ -221,7 +253,7 @@ const Profile = () => {
 
           {/* Tab Content */}
           <div className="p-6">
-            {activeTab === 'projects' ? (
+            {activeTab === "projects" ? (
               <div className="space-y-6">
                 {userProjects.length === 0 ? (
                   <div className="text-center py-12">
@@ -234,18 +266,21 @@ const Profile = () => {
                   </div>
                 ) : (
                   userProjects.map((project) => (
-                    <div key={project.id} className="bg-slate-700/30 border border-slate-600/50 rounded-lg p-6 hover:bg-slate-700/50 transition-all duration-200">
+                    <div
+                      key={project.id}
+                      className="bg-slate-700/30 border border-slate-600/50 rounded-lg p-6 hover:bg-slate-700/50 transition-all duration-200"
+                    >
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex-1">
                           <h3 className="text-xl font-bold text-white mb-2 hover:text-purple-400 transition-colors cursor-pointer">
                             {project.title}
                           </h3>
                           <p className="text-slate-400 mb-4">{project.description}</p>
-                          
+
                           {project.link && (
-                            <a 
-                              href={project.link} 
-                              target="_blank" 
+                            <a
+                              href={project.link}
+                              target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center text-purple-400 hover:text-purple-300 transition-colors"
                             >
@@ -254,7 +289,7 @@ const Profile = () => {
                             </a>
                           )}
                         </div>
-                        
+
                         <div className="text-right">
                           <p className="text-slate-400 text-sm mb-2">{formatDate(project.createdAt)}</p>
                           <div className="flex items-center text-slate-400">
@@ -277,6 +312,7 @@ const Profile = () => {
           </div>
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

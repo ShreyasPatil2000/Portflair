@@ -1,17 +1,9 @@
-import { useUser } from "@/Context/UserContext";
 import { BookOpen } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import UserMenu from "../UserMenu/page";
-import { useEffect } from "react";
 
 const Navbar = () => {
-  const { user } = useUser();
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!user) {
-      navigate("/auth");
-    }
-  }, [user, navigate]);
   return (
     <div>
       {/* Navigation Header */}

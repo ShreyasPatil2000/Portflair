@@ -5,6 +5,7 @@ import { useAuthValidation } from "@/component/Validate/page";
 import apiClient from "@/lib/api";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@/Context/UserContext";
+// import { useToast } from "@/components/ui/use-toast"
 
 const AuthForm = () => {
   const { user, setUser } = useUser();
@@ -48,6 +49,10 @@ const AuthForm = () => {
           console.log("Login success:", response.data);
           // Store user or redirect as needed
           navigate("/");
+          // toast({
+          //   title: "✅ Logged in",
+          //   description: "Welcome back!",
+          // });
         }
       } else {
         console.log("Signup attempt:", { email, password, confirmPassword });
@@ -250,13 +255,19 @@ const AuthForm = () => {
         <div className="text-center mt-8">
           <p className="text-slate-500 text-sm">
             By continuing, you agree to our{" "}
-            <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">
+            <button
+              onClick={() => navigate("/terms")}
+              className="text-purple-400 hover:text-purple-300 transition-colors underline cursor-pointer"
+            >
               Terms of Service
-            </a>{" "}
+            </button>{" "}
             and{" "}
-            <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">
+            <button
+              onClick={() => navigate("/privacy")}
+              className="text-purple-400 hover:text-purple-300 transition-colors underline cursor-pointer"
+            >
               Privacy Policy
-            </a>
+            </button>
           </p>
         </div>
       </div>

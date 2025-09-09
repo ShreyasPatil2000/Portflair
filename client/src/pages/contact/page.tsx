@@ -13,14 +13,16 @@ const Contact = () => {
     message: "",
   });
 
-  const handleInputChange = (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleInputChange = (e: any) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     // Handle form submission here
     console.log("Form submitted:", formData);
