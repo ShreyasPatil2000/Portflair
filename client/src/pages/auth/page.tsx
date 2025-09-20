@@ -5,7 +5,7 @@ import { useAuthValidation } from "@/component/Validate/page";
 import apiClient from "@/lib/api";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@/Context/UserContext";
-// import { useToast } from "@/components/ui/use-toast"
+import { toast } from "sonner";
 
 const AuthForm = () => {
   const { user, setUser } = useUser();
@@ -42,31 +42,27 @@ const AuthForm = () => {
       e.preventDefault();
       if (isLogin) {
         console.log("Login attempt:", { email, password });
-
         if (validateLogin(email, password)) {
           const response = await apiClient.post(LOGIN_ROUTE, { email, password }, { withCredentials: true });
           setUser(response.data.user);
           console.log("Login success:", response.data);
+          toast.success(response.data.user?.name + " has successfully logged in.");
           // Store user or redirect as needed
           navigate("/");
-          // toast({
-          //   title: "✅ Logged in",
-          //   description: "Welcome back!",
-          // });
         }
       } else {
         console.log("Signup attempt:", { email, password, confirmPassword });
-
         if (validateSignup(email, password, confirmPassword)) {
           const response = await apiClient.post(SIGNUP_ROUTE, { name, email, password }, { withCredentials: true });
           console.log("Signup success:", response.data);
-          // Store user or redirect as needed
+          toast.info(response.data.user?.name + " has successfully signed up.");
           navigate("/auth");
         }
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Auth error:", error.response?.data || error.message);
+      toast.error("User Authentication has failed.");
     }
   };
 

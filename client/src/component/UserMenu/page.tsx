@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { LOGOUT_ROUTE } from "@/utils/constants";
 import apiClient from "@/lib/api";
 import { useEffect } from "react";
+import { toast } from "sonner";
 
 const UserMenu = () => {
   const { user, setUser } = useUser();
@@ -30,6 +31,7 @@ const UserMenu = () => {
       if (response.status === 200) {
         navigate("/auth");
         setUser(null);
+        toast.success(user?.name + " has logged out successfully.");
       }
     } catch (error) {
       console.error("Auth error: ", error);
