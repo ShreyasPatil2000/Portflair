@@ -15,6 +15,7 @@ export type User = {
 
 interface UserContextType {
   user: User | null;
+  loading: boolean;
   setUser: (user: User | null) => void;
 }
 
@@ -22,6 +23,7 @@ const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -31,13 +33,15 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       } catch (err) {
         console.log("No active session and error: ", err);
         setUser(null);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchUser();
   }, []);
 
-  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ user, loading, setUser }}>{children}</UserContext.Provider>;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components

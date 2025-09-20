@@ -46,7 +46,7 @@ const ResetPassword = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Main Card */}
-        <div className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl p-8">
+        <form onSubmit={handleSubmit} className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl p-8">
           <BackButtonForm />
           {/* Header */}
           <div className="text-center mb-8">
@@ -118,16 +118,15 @@ const ResetPassword = () => {
             </div>
             {/* Submit Button */}
             <button
-              type="button"
+              type="submit"
               title="Submit for forget password"
-              onClick={handleSubmit}
               className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 px-4 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200 flex items-center justify-center group cursor-pointer"
             >
               Set Password
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
           </div>
-        </div>
+        </form>
         {/* Footer */}
         <div className="text-center mt-8">
           <p className="text-slate-500 text-sm">

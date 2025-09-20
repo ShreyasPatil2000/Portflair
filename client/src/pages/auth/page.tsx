@@ -90,7 +90,7 @@ const AuthForm = () => {
           </div>
 
           {/* Form */}
-          <div className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             {/* Name Field (Signup only) */}
             {!isLogin && (
               <div className="space-y-2">
@@ -195,14 +195,13 @@ const AuthForm = () => {
 
             {/* Submit Button */}
             <button
-              type="button"
-              onClick={handleSubmit}
+              type="submit"
               className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 px-4 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200 flex items-center justify-center group cursor-pointer"
             >
               {isLogin ? "Sign In" : "Create Account"}
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
-          </div>
+          </form>
 
           {/* Divider */}
           <div className="my-8 flex items-center">
