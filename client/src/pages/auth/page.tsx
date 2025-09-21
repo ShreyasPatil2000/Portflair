@@ -62,7 +62,8 @@ const AuthForm = () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Auth error:", error.response?.data || error.message);
-      toast.error("User Authentication has failed.");
+      const message = error.response?.data?.message || "Invalid username or password ❌";
+      toast.error(message);
     }
   };
 
