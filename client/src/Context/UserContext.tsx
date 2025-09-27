@@ -30,9 +30,11 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
       try {
         const res = await apiClient.get(GET_PROFILE_ROUTES, { withCredentials: true });
         setUser(res.data.user);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
       } catch (err) {
         console.log("No active session and error: ", err);
         setUser(null);
+        localStorage.removeItem("user");
       } finally {
         setLoading(false);
       }

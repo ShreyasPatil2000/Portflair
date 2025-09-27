@@ -10,20 +10,89 @@ import PrivacyPolicy from "./pages/privacypolicy/page";
 import About from "./pages/about/page";
 import Contact from "./pages/contact/page";
 import { Toaster } from "sonner";
+import { Navigate } from "react-router-dom";
+import { useUser } from "@/Context/UserContext";
+import LoadingPage from "./component/LoadingPage/page";
+
+function PrivateRoute({ children }: { children: React.ReactNode }) {
+  const { user, loading } = useUser();
+  if (loading) return <LoadingPage />;
+  return user ? children : <Navigate to="/auth" />;
+}
+
+function AuthRoute({ children }: { children: React.ReactNode }) {
+  const { user, loading } = useUser();
+  if (loading) return <LoadingPage />;
+  return user ? <Navigate to="/" /> : children;
+}
 
 function App() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/auth" element={<AuthForm />} />
-        <Route path="/profile/:userId" element={<Profile />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+        {/* Public Routes */}
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
+
+        {/* Auth Routes(blocked if logged in) */}
+        <Route
+          path="/auth"
+          element={
+            <AuthRoute>
+              <AuthForm />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/forgot-password"
+          element={
+            <AuthRoute>
+              <ForgotPassword />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/reset-password"
+          element={
+            <AuthRoute>
+              <ResetPassword />
+            </AuthRoute>
+          }
+        />
+
+        {/* Protected Routes */}
+        <Route
+          path="/"
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile/:userId"
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <PrivateRoute>
+              <About />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <PrivateRoute>
+              <Contact />
+            </PrivateRoute>
+          }
+        />
       </Routes>
       <Toaster richColors position="top-right" />
     </>

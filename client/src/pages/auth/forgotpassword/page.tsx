@@ -1,24 +1,15 @@
-import apiClient from "@/lib/api";
-import { useNavigate } from "react-router-dom";
-import { useUser } from "@/Context/UserContext";
 import { ArrowRight, Lock, Mail } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BackButtonForm from "@/component/BackButtonForm/page";
 
 const ForgotPassword = () => {
-  const { user, setUser } = useUser();
+  // const { user, setUser } = useUser();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
   });
-
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [user, navigate]);
 
   // Note this for multiple State inputs
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -13,17 +13,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { LOGOUT_ROUTE } from "@/utils/constants";
 import apiClient from "@/lib/api";
-import { useEffect } from "react";
 import { toast } from "sonner";
 
 const UserMenu = () => {
   const { user, setUser } = useUser();
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!user) {
-      navigate("/auth");
-    }
-  }, [user, navigate]);
 
   const handleLogout = async () => {
     try {

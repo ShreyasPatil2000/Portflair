@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Eye, EyeOff, Mail, Lock, User, ArrowRight } from "lucide-react";
 import { LOGIN_ROUTE, SIGNUP_ROUTE } from "@/utils/constants";
 import { useAuthValidation } from "@/component/Validate/page";
@@ -8,7 +8,7 @@ import { useUser } from "@/Context/UserContext";
 import { toast } from "sonner";
 
 const AuthForm = () => {
-  const { user, setUser } = useUser();
+  const { setUser } = useUser();
   const { validateLogin, validateSignup } = useAuthValidation();
   const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
@@ -20,12 +20,6 @@ const AuthForm = () => {
     password: "",
     confirmPassword: "",
   });
-
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [user, navigate]);
 
   // Note this for multiple State inputs
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,6 +40,7 @@ const AuthForm = () => {
           const response = await apiClient.post(LOGIN_ROUTE, { email, password }, { withCredentials: true });
           setUser(response.data.user);
           console.log("Login success:", response.data);
+          localStorage.setItem("user", JSON.stringify(response.data.user));
           toast.success(response.data.user?.name + " has successfully logged in.");
           // Store user or redirect as needed
           navigate("/");

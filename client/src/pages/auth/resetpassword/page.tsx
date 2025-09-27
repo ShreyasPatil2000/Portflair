@@ -1,28 +1,16 @@
-import apiClient from "@/lib/api";
-import { useNavigate } from "react-router-dom";
-import { useUser } from "@/Context/UserContext";
 import { ArrowRight, Eye, EyeOff, Lock, Mail } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BackButtonForm from "@/component/BackButtonForm/page";
 
 const ResetPassword = () => {
-  const { user, setUser } = useUser();
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
-
-  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     newPassword: "",
   });
-
-  useEffect(() => {
-    if (user) {
-      navigate("/");
-    }
-  }, [user, navigate]);
 
   // Note this for multiple State inputs
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,7 +34,10 @@ const ResetPassword = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Main Card */}
-        <form onSubmit={handleSubmit} className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl p-8">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl p-8"
+        >
           <BackButtonForm />
           {/* Header */}
           <div className="text-center mb-8">
