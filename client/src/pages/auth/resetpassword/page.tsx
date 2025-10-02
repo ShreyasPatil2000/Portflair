@@ -121,11 +121,11 @@ const ResetPassword = () => {
         {/* Footer */}
         <div className="text-center mt-8">
           <p className="text-slate-500 text-sm">
-            By continuing, you agree to our{" "}
+            By continuing, you agree to our
             <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">
               Terms of Service
-            </a>{" "}
-            and{" "}
+            </a>
+            and
             <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">
               Privacy Policy
             </a>

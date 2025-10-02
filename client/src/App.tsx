@@ -13,6 +13,7 @@ import { Toaster } from "sonner";
 import { Navigate } from "react-router-dom";
 import { useUser } from "@/Context/UserContext";
 import LoadingPage from "./component/LoadingPage/page";
+import ResetForgottenPassword from "./pages/auth/resetforgottenpassword/page";
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useUser();
@@ -56,6 +57,14 @@ function App() {
           element={
             <AuthRoute>
               <ResetPassword />
+            </AuthRoute>
+          }
+        />
+        <Route
+          path="/reset-forgotten-password"
+          element={
+            <AuthRoute>
+              <ResetForgottenPassword />
             </AuthRoute>
           }
         />
