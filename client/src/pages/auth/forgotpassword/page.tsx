@@ -1,9 +1,12 @@
 import { ArrowRight, Lock, Mail } from "lucide-react";
 import { useState } from "react";
 import BackButtonForm from "@/component/BackButtonForm/page";
+import apiClient from "@/lib/api";
+import { FORGOT_PASSWORD_ROUTE } from "@/utils/constants";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
   });
@@ -20,6 +23,11 @@ const ForgotPassword = () => {
     const { email } = formData;
     try {
       e.preventDefault();
+      console.log("Password reset attempt with email: ", email);
+      const response = await apiClient.post(FORGOT_PASSWORD_ROUTE, { email }, { withCredentials: true });
+      console.log(response.data);
+
+      navigate("/reset-forgotten-password");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Auth error:", error.response?.data || error.message);
@@ -30,7 +38,10 @@ const ForgotPassword = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Main Card */}
-        <form onSubmit={handleSubmit} className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl p-8">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl shadow-2xl p-8"
+        >
           <BackButtonForm />
           {/* Header */}
           <div className="text-center mb-8">

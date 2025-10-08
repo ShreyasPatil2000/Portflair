@@ -1,6 +1,9 @@
 import { ArrowRight, Eye, EyeOff, Lock, Mail } from "lucide-react";
 import { useState } from "react";
 import BackButtonForm from "@/component/BackButtonForm/page";
+import { RESET_PASSWORD_ROUTE } from "@/utils/constants";
+import apiClient from "@/lib/api";
+// import { toast } from "sonner";
 
 const ResetPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -22,6 +25,14 @@ const ResetPassword = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     const { email, password, newPassword } = formData;
+    const response = await apiClient.post(
+      RESET_PASSWORD_ROUTE,
+      { email, password, newPassword },
+      { withCredentials: true }
+    );
+    console.log(response.data);
+    // toast.success(response.data.user?.name + " has successfully reset the password.");
+    // navigate("/auth");
     try {
       e.preventDefault();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -123,11 +134,13 @@ const ResetPassword = () => {
           <p className="text-slate-500 text-sm">
             By continuing, you agree to our
             <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">
-              Terms of Service
+              {" "}
+              Terms of Service{" "}
             </a>
             and
             <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">
-              Privacy Policy
+              {" "}
+              Privacy Policy{" "}
             </a>
           </p>
         </div>
