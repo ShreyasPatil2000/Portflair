@@ -3,11 +3,15 @@ import { useState } from "react";
 import BackButtonForm from "@/component/BackButtonForm/page";
 import { RESET_PASSWORD_ROUTE } from "@/utils/constants";
 import apiClient from "@/lib/api";
-// import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import { useAuthValidation } from "@/component/Validate/page";
 
 const ResetPassword = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
+  const { validateResetPassword } = useAuthValidation();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -25,16 +29,18 @@ const ResetPassword = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     const { email, password, newPassword } = formData;
-    const response = await apiClient.post(
-      RESET_PASSWORD_ROUTE,
-      { email, password, newPassword },
-      { withCredentials: true }
-    );
-    console.log(response.data);
-    // toast.success(response.data.user?.name + " has successfully reset the password.");
-    // navigate("/auth");
     try {
       e.preventDefault();
+      if (validateResetPassword(email, password, newPassword)) {
+        const response = await apiClient.post(
+          RESET_PASSWORD_ROUTE,
+          { email, password, newPassword },
+          { withCredentials: true }
+        );
+        console.log(response.data);
+        toast.success(response.data.user?.name + " has successfully reset the password.");
+        navigate("/auth");
+      }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Auth error:", error.response?.data || error.message);
@@ -106,7 +112,7 @@ const ResetPassword = () => {
                   value={formData.newPassword}
                   onChange={handleInputChange}
                   className="w-full pl-10 pr-12 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
-                  placeholder="Confirm your password"
+                  placeholder="Enter the new password"
                   required
                 />
                 <button

@@ -45,5 +45,33 @@ export const useAuthValidation = () => {
     return true;
   };
 
-  return { validateLogin, validateSignup };
+  const validateResetPassword = (email: string, password: string, newPassword: string) => {
+    if (!email.length) {
+      toast.error("Email is required.");
+      return false;
+    }
+    if (!password.length) {
+      toast.error("Password is required.");
+      return false;
+    }
+    if (newPassword.length < 10) {
+      toast.error("Password needs to be at least 10 characters long.");
+      return false;
+    }
+    if (newPassword.search(/[a-z]/i) < 0) {
+      toast.error("Password must contain at least 1 lowercase letter.");
+      return false;
+    }
+    if (newPassword.search(/[A-Z]/i) < 0) {
+      toast.error("Password must contain at least 1 uppercase letter.");
+      return false;
+    }
+    if (newPassword.search(/[!@#$%^&*(),.?":{}|<>]/) < 0) {
+      toast.error("Password must contain at least 1 special character.");
+      return false;
+    }
+    return true;
+  };
+
+  return { validateLogin, validateSignup, validateResetPassword };
 };

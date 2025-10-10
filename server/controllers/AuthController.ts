@@ -8,6 +8,10 @@ export const signup = async (req: any, res: any) => {
 
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) return res.status(400).json({ error: "User already exists" });
+    const passwordCheck = validatePassword(password);
+    if (!passwordCheck.valid) {
+      return res.status(400).json({ error: passwordCheck.error });
+    }
 
     const hashedPassword = await hashPassword(password);
     const user = await prisma.user.create({
@@ -15,8 +19,8 @@ export const signup = async (req: any, res: any) => {
     });
 
     const token = generateToken({ id: user.id, email: user.email });
-    res.cookie("token", token, { httpOnly: true, sameSite: "lax" }); // secure: true on prod
-    res.json({ message: "Signup successful", user: { id: user.id, name: user.name, email: user.email } });
+    res.cookie("token", token, { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production" }); // secure: true on prod
+    res.status(200).json({ message: "Signup successful", user: { id: user.id, name: user.name, email: user.email } });
   } catch (error) {
     console.log({ error });
     return res.status(500).send("Internal Server Error.");
@@ -31,10 +35,17 @@ export const login = async (req: any, res: any) => {
     if (!user || !(await verifyPassword(password, user.password))) {
       return res.status(401).json({ error: "Invalid credentials" });
     }
+    const passwordCheck = validatePassword(password);
+    if (!passwordCheck.valid) {
+      return res.status(400).json({ error: passwordCheck.error });
+    }
 
     const token = generateToken({ id: user.id, email: user.email });
-    res.cookie("token", token, { httpOnly: true, sameSite: "lax" }); // secure: true on prod
-    res.json({ message: "Login successful", user: { id: user.id, name: user.name, email: user.email } });
+    res.cookie("token", token, { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production" }); // secure: true on prod
+    res.status(200).json({
+      message: "Login successful",
+      user: { id: user.id, name: user.name, email: user.email },
+    });
   } catch (error) {
     console.log({ error });
     return res.status(500).send("Internal Server Error.");
@@ -51,8 +62,38 @@ export const logout = async (req: any, res: any) => {
   }
 };
 
-export const forgotPassword = async (req: any, res: any) => {};
+export const forgotPassword = async (req: any, res: any) => {
+  try {
+  } catch (error) {
+    console.log({ error });
+    return res.status(500).send("Internal Server Error.");
+  }
+};
 
-export const resetPassword = async (req: any, res: any) => {};
+export const resetPassword = async (req: any, res: any) => {
+  try {
+    const { email, password, newPassword } = req.body;
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      return res.status(401).send("Invalid Credentials");
+    }
+    if (!(await verifyPassword(password, user.password))) {
+      return res.status(401).send("Invalid Credentials");
+    }
+    const passwordCheck = validatePassword(newPassword);
+    if (!passwordCheck.valid) {
+      return res.status(400).json({ error: passwordCheck.error });
+    }
+    const hashedPassword = await hashPassword(newPassword);
+    await prisma.user.update({ where: { email }, data: { password: hashedPassword } });
+    res.status(200).json({
+      message: "Password has been updated for",
+      user: { id: user.id, name: user.name, email: user.email },
+    });
+  } catch (error) {
+    console.log({ error });
+    return res.status(500).send("Internal Server Error.");
+  }
+};
 
 export const deleteAcccount = async (req: any, res: any) => {};

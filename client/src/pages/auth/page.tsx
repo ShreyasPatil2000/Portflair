@@ -35,7 +35,6 @@ const AuthForm = () => {
     try {
       e.preventDefault();
       if (isLogin) {
-        console.log("Login attempt:", { email, password });
         if (validateLogin(email, password)) {
           const response = await apiClient.post(LOGIN_ROUTE, { email, password }, { withCredentials: true });
           setUser(response.data.user);
@@ -46,7 +45,6 @@ const AuthForm = () => {
           navigate("/");
         }
       } else {
-        console.log("Signup attempt:", { email, password, confirmPassword });
         if (validateSignup(email, password, confirmPassword)) {
           const response = await apiClient.post(SIGNUP_ROUTE, { name, email, password }, { withCredentials: true });
           console.log("Signup success:", response.data);
