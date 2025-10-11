@@ -6,6 +6,7 @@ import apiClient from "@/lib/api";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "@/Context/UserContext";
 import { toast } from "sonner";
+import FormFooter from "@/component/FormFooter/page";
 
 const AuthForm = () => {
   const { setUser } = useUser();
@@ -239,26 +240,7 @@ const AuthForm = () => {
             </p>
           </div>
         </div>
-
-        {/* Footer */}
-        <div className="text-center mt-8">
-          <p className="text-slate-500 text-sm">
-            By continuing, you agree to our{" "}
-            <button
-              onClick={() => navigate("/terms")}
-              className="text-purple-400 hover:text-purple-300 transition-colors underline cursor-pointer"
-            >
-              Terms of Service
-            </button>{" "}
-            and{" "}
-            <button
-              onClick={() => navigate("/privacy")}
-              className="text-purple-400 hover:text-purple-300 transition-colors underline cursor-pointer"
-            >
-              Privacy Policy
-            </button>
-          </p>
-        </div>
+        <FormFooter />
       </div>
     </div>
   );

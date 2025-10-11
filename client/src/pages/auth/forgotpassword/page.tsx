@@ -4,6 +4,8 @@ import BackButtonForm from "@/component/BackButtonForm/page";
 import apiClient from "@/lib/api";
 import { FORGOT_PASSWORD_ROUTE } from "@/utils/constants";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import FormFooter from "@/component/FormFooter/page";
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
@@ -26,8 +28,10 @@ const ForgotPassword = () => {
       console.log("Password reset attempt with email: ", email);
       const response = await apiClient.post(FORGOT_PASSWORD_ROUTE, { email }, { withCredentials: true });
       console.log(response.data);
-
-      navigate("/reset-forgotten-password");
+      if (response.data) {
+        toast.success("Check your registered email for password recovery link");
+      }
+      navigate("/auth");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Auth error:", error.response?.data || error.message);
@@ -78,19 +82,7 @@ const ForgotPassword = () => {
             </button>
           </div>
         </form>
-        {/* Footer */}
-        <div className="text-center mt-8">
-          <p className="text-slate-500 text-sm">
-            By continuing, you agree to our{" "}
-            <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">
-              Terms of Service
-            </a>{" "}
-            and{" "}
-            <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">
-              Privacy Policy
-            </a>
-          </p>
-        </div>
+        <FormFooter />
       </div>
     </div>
   );

@@ -1,4 +1,3 @@
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import AuthForm from "./pages/auth/page";
 import HomePage from "./pages/home/page";
@@ -61,7 +60,7 @@ function App() {
           }
         />
         <Route
-          path="/reset-forgotten-password"
+          path="/reset-forgotten-password/:token"
           element={
             <AuthRoute>
               <ResetForgottenPassword />

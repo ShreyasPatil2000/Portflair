@@ -1,12 +1,16 @@
-// import apiClient from "@/lib/api"; 
+import apiClient from "@/lib/api";
+import FormFooter from "@/component/FormFooter/page";
 import { ArrowRight, Eye, EyeOff, Lock } from "lucide-react";
-import { useState } from "react"; 
-// import { useNavigate } from "react-router-dom"; 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { RESET_FORGOTTEN_PASSWORD_ROUTE } from "@/utils/constants";
+import { useParams } from "react-router-dom";
 
 const ResetForgottenPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
-  // const navigate = useNavigate(); 
+  const navigate = useNavigate();
+  const { token } = useParams();
 
   const [formData, setFormData] = useState({
     password: "",
@@ -21,13 +25,16 @@ const ResetForgottenPassword = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    // const { password } = formData; 
+    const { password } = formData;
     try {
       e.preventDefault();
-      // const response = await apiClient.post(RESET_PASSWORD_ROUTE, { password }, { withCredentials: true });
-      // toast.success(response.data.user?.name + " has successfully reset the password.");
-
-      // navigate("/");
+      const response = await apiClient.post(
+        RESET_FORGOTTEN_PASSWORD_ROUTE,
+        { token, password },
+        { withCredentials: true }
+      );
+      toast.success(response.data.user?.name + " has successfully reset the password.");
+      navigate("/auth");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Auth error:", error.response?.data || error.message);
@@ -86,21 +93,7 @@ const ResetForgottenPassword = () => {
             </button>
           </div>
         </form>
-        {/* Footer */}
-        <div className="text-center mt-8">
-          <p className="text-slate-500 text-sm">
-            By continuing, you agree to our
-            <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">
-              {" "}
-              Terms of Service{" "}
-            </a>
-            and
-            <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">
-              {" "}
-              Privacy Policy{" "}
-            </a>
-          </p>
-        </div>
+        <FormFooter />
       </div>
     </div>
   );

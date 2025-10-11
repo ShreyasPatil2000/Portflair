@@ -6,6 +6,7 @@ import apiClient from "@/lib/api";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useAuthValidation } from "@/component/Validate/page";
+import FormFooter from "@/component/FormFooter/page";
 
 const ResetPassword = () => {
   const navigate = useNavigate();
@@ -135,21 +136,7 @@ const ResetPassword = () => {
             </button>
           </div>
         </form>
-        {/* Footer */}
-        <div className="text-center mt-8">
-          <p className="text-slate-500 text-sm">
-            By continuing, you agree to our
-            <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">
-              {" "}
-              Terms of Service{" "}
-            </a>
-            and
-            <a href="#" className="text-purple-400 hover:text-purple-300 transition-colors">
-              {" "}
-              Privacy Policy{" "}
-            </a>
-          </p>
-        </div>
+        <FormFooter />
       </div>
     </div>
   );

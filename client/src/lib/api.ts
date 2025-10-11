@@ -5,6 +5,4 @@ const apiClient = axios.create({
   withCredentials: true,
 });
 
-console.log("API Base URL:", import.meta.env.BACKEND_URL);
-
 export default apiClient;
