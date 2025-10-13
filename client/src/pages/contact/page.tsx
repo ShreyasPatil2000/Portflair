@@ -152,6 +152,7 @@ const Contact = () => {
                   name="subject"
                   value={formData.subject}
                   onChange={handleInputChange}
+                  title="Select a Subject from the list"
                   className="w-full px-4 py-3 bg-slate-700/50 border border-slate-600/50 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
                   required
                 >
@@ -183,6 +184,7 @@ const Contact = () => {
               <button
                 type="submit"
                 className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white font-medium py-3 px-6 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all duration-200 flex items-center justify-center"
+                title="Submit the message"
               >
                 <Send className="w-5 h-5 mr-2" />
                 Send Message

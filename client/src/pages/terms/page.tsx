@@ -142,6 +142,7 @@ const Terms = () => {
                 <a
                   href="mailto:legal@portflair.com"
                   className="text-purple-400 hover:text-purple-300 transition-colors"
+                  title="Contact us at this email"
                 >
                   legal@portflair.com
                 </a>

@@ -163,6 +163,7 @@ const PrivacyPolicy = () => {
                 <a
                   href="mailto:privacy@portflair.com"
                   className="text-purple-400 hover:text-purple-300 transition-colors"
+                  title="Send email"
                 >
                   privacy@portflair.com
                 </a>
@@ -230,6 +231,7 @@ const PrivacyPolicy = () => {
                   <a
                     href="mailto:privacy@portflair.com"
                     className="text-purple-400 hover:text-purple-300 transition-colors"
+                    title="Send email"
                   >
                     privacy@portflair.com
                   </a>
@@ -240,6 +242,7 @@ const PrivacyPolicy = () => {
                   <button
                     onClick={() => navigate("/contact")}
                     className="text-purple-400 hover:text-purple-300 transition-colors underline cursor-pointer"
+                    title="Go to Contact Page"
                   >
                     Contact Us
                   </button>

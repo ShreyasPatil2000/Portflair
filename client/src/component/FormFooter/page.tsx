@@ -10,6 +10,7 @@ const FormFooter = () => {
         <button
           onClick={() => navigate("/terms")}
           className="text-purple-400 hover:text-purple-300 transition-colors underline cursor-pointer"
+          title="Read the Terms of Service"
         >
           Terms of Service
         </button>{" "}
@@ -17,6 +18,7 @@ const FormFooter = () => {
         <button
           onClick={() => navigate("/privacy")}
           className="text-purple-400 hover:text-purple-300 transition-colors underline cursor-pointer"
+          title="Read the Privacy Policy"
         >
           Privacy Policy
         </button>

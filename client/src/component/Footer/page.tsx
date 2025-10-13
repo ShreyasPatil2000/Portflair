@@ -28,6 +28,7 @@ const Footer = () => {
                 <button
                   onClick={() => navigate("/about")}
                   className="text-slate-400 hover:text-purple-400 transition-colors text-sm cursor-pointer"
+                  title="About Us"
                 >
                   About
                 </button>
@@ -36,6 +37,7 @@ const Footer = () => {
                 <button
                   onClick={() => navigate("/contact")}
                   className="text-slate-400 hover:text-purple-400 transition-colors text-sm cursor-pointer"
+                  title="Contact Us"
                 >
                   Contact
                 </button>
@@ -51,14 +53,16 @@ const Footer = () => {
                 <button
                   onClick={() => navigate("/")}
                   className="text-slate-400 hover:text-purple-400 transition-colors text-sm cursor-pointer"
+                  title="Go to the Home Page"
                 >
                   Home
                 </button>
               </li>
               <li>
                 <button
-                  onClick={() => navigate("/profile/:[userId]")}
+                  onClick={() => navigate("/profile/:userId")}
                   className="text-slate-400 hover:text-purple-400 transition-colors text-sm cursor-pointer"
+                  title="Go to Profile Page"
                 >
                   Profile
                 </button>
@@ -75,12 +79,14 @@ const Footer = () => {
               <button
                 onClick={() => navigate("/terms")}
                 className="text-slate-400 hover:text-purple-400 transition-colors text-sm cursor-pointer"
+                title="Read the Terms of Service"
               >
                 Terms of Service
               </button>
               <button
                 onClick={() => navigate("/privacy")}
                 className="text-slate-400 hover:text-purple-400 transition-colors text-sm cursor-pointer"
+                title="Read the Privacy Policy"
               >
                 Privacy Policy
               </button>

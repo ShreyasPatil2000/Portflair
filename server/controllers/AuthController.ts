@@ -8,19 +8,16 @@ import { Request, Response } from "express";
 export const signup = async (req: Request, res: Response) => {
   try {
     const { name, email, password } = req.body;
-
     const existingUser = await prisma.user.findUnique({ where: { email } });
     if (existingUser) return res.status(400).json({ error: "User already exists" });
     const passwordCheck = validatePassword(password);
     if (!passwordCheck.valid) {
       return res.status(400).json({ error: passwordCheck.error });
     }
-
     const hashedPassword = await hashPassword(password);
     const user = await prisma.user.create({
       data: { name, email, password: hashedPassword },
     });
-
     const token = generateToken({ id: user.id, email: user.email });
     res.cookie("token", token, { httpOnly: true, sameSite: "lax", secure: process.env.NODE_ENV === "production" }); // secure: true on prod
     res.status(200).json({ message: "Signup successful", user: { id: user.id, name: user.name, email: user.email } });

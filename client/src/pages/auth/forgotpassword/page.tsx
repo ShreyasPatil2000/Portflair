@@ -81,7 +81,7 @@ const ForgotPassword = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                title="Submit for forget password"
+                title="Submit to get reset email link"
                 className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 px-4 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200 flex items-center justify-center group cursor-pointer"
               >
                 Set Password

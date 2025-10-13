@@ -132,6 +132,7 @@ const AuthForm = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
+                  title="Show Password"
                   className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-300 transition-colors cursor-pointer"
                 >
                   {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -156,6 +157,7 @@ const AuthForm = () => {
                   <button
                     type="button"
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    title="Show the password"
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-300 transition-colors cursor-pointer"
                   >
                     {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
@@ -171,6 +173,7 @@ const AuthForm = () => {
                   type="button"
                   className="text-sm text-purple-400 hover:text-purple-300 transition-colors cursor-pointer"
                   onClick={() => navigate("/reset-password")}
+                  title="Click here to reset your password"
                 >
                   Reset password?
                 </button>
@@ -178,6 +181,7 @@ const AuthForm = () => {
                   type="button"
                   className="text-sm text-purple-400 hover:text-purple-300 transition-colors cursor-pointer"
                   onClick={() => navigate("/forgot-password")}
+                  title="Click here if you forgot your password"
                 >
                   Forgot password?
                 </button>
@@ -188,6 +192,7 @@ const AuthForm = () => {
             <button
               type="submit"
               className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 px-4 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-800 transition-all duration-200 flex items-center justify-center group cursor-pointer"
+              title="Submit to proceed"
             >
               {isLogin ? "Sign In" : "Create Account"}
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -234,6 +239,7 @@ const AuthForm = () => {
                 type="button"
                 onClick={toggleMode}
                 className="text-purple-400 hover:text-purple-300 font-semibold transition-colors cursor-pointer"
+                title="Toggle between login and sign up page"
               >
                 {isLogin ? "Sign up" : "Sign in"}
               </button>
