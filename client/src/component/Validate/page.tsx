@@ -70,8 +70,36 @@ export const useAuthValidation = () => {
       toast.error("Password must contain at least 1 special character.");
       return false;
     }
+    if (password !== newPassword) {
+      toast.error("Password and the new Password is same.");
+      return false;
+    }
     return true;
   };
 
-  return { validateLogin, validateSignup, validateResetPassword };
+  const validatePassword = (password: string) => {
+    if (!password.length) {
+      toast.error("Password is required.");
+      return false;
+    }
+    if (password.length < 10) {
+      toast.error("Password needs to be at least 10 characters long.");
+      return false;
+    }
+    if (password.search(/[a-z]/i) < 0) {
+      toast.error("Password must contain at least 1 lowercase letter.");
+      return false;
+    }
+    if (password.search(/[A-Z]/i) < 0) {
+      toast.error("Password must contain at least 1 uppercase letter.");
+      return false;
+    }
+    if (password.search(/[!@#$%^&*(),.?":{}|<>]/) < 0) {
+      toast.error("Password must contain at least 1 special character.");
+      return false;
+    }
+    return true;
+  };
+
+  return { validateLogin, validateSignup, validateResetPassword, validatePassword };
 };

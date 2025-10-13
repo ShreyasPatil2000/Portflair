@@ -1,6 +1,7 @@
+import { Request, Response } from "express";
 import { prisma } from "../lib/prisma";
 
-export const getProfile = async (req: any, res: any) => {
+export const getProfile = async (req: Request, res: Response) => {
   const userId = (req as any).user.id;
 
   try {
@@ -26,4 +27,4 @@ export const getProfile = async (req: any, res: any) => {
   }
 };
 
-export const editProfile = async (req: any, res: any) => {};
+export const editProfile = async (req: Request, res: Response) => {};

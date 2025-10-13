@@ -37,7 +37,7 @@ const AuthForm = () => {
       e.preventDefault();
       if (isLogin) {
         if (validateLogin(email, password)) {
-          const response = await apiClient.post(LOGIN_ROUTE, { email, password }, { withCredentials: true });
+          const response = await apiClient.post(LOGIN_ROUTE, { email, password });
           setUser(response.data.user);
           console.log("Login success:", response.data);
           localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -47,10 +47,10 @@ const AuthForm = () => {
         }
       } else {
         if (validateSignup(email, password, confirmPassword)) {
-          const response = await apiClient.post(SIGNUP_ROUTE, { name, email, password }, { withCredentials: true });
+          const response = await apiClient.post(SIGNUP_ROUTE, { name, email, password });
           console.log("Signup success:", response.data);
           toast.info(response.data.user?.name + " has successfully signed up.");
-          navigate("/auth");
+          setIsLogin(true);
         }
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any

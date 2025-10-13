@@ -8,6 +8,7 @@ import {
   resetPassword,
   resetForgottenPassword,
 } from "../controllers/AuthController.ts";
+import { authenticateToken } from "../middleware/AuthMiddleware.ts";
 
 const authRoutes = Router();
 
@@ -16,7 +17,7 @@ authRoutes.post("/login", login);
 authRoutes.post("/logout", logout);
 authRoutes.post("/forgot-password", forgotPassword);
 authRoutes.post("/reset-password", resetPassword);
-authRoutes.post("/delete-account", deleteAcccount);
+authRoutes.delete("/delete-account", authenticateToken, deleteAcccount);
 authRoutes.post("/reset-forgotten-password/", resetForgottenPassword);
 
 export default authRoutes;

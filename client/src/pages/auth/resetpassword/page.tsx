@@ -33,11 +33,7 @@ const ResetPassword = () => {
     try {
       e.preventDefault();
       if (validateResetPassword(email, password, newPassword)) {
-        const response = await apiClient.post(
-          RESET_PASSWORD_ROUTE,
-          { email, password, newPassword },
-          { withCredentials: true }
-        );
+        const response = await apiClient.post(RESET_PASSWORD_ROUTE, { email, password, newPassword });
         console.log(response.data);
         toast.success(response.data.user?.name + " has successfully reset the password.");
         navigate("/auth");

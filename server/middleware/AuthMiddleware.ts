@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import { verifyToken } from "../utils/jwt";
-const JWT_SECRET = process.env.JWT_SECRET!;
 
 export function authenticateToken(req: Request, res: Response, next: NextFunction) {
   const token = req.cookies.token;

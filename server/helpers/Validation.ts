@@ -1,4 +1,4 @@
-const validatePassword = (password: string): { valid: boolean; error?: string } => {
+export const validatePassword = (password: string): { valid: boolean; error?: string } => {
   if (!password || password.length < 10) {
     return { valid: false, error: "Password must be at least 10 characters" };
   }
