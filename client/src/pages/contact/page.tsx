@@ -1,11 +1,12 @@
 import Footer from "@/component/Footer/page";
 import Navbar from "@/component/Navbar/page";
+import apiClient from "@/lib/api";
+import { CONTACT_ROUTE } from "@/utils/constants";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Contact = () => {
-  // const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,22 +14,25 @@ const Contact = () => {
     message: "",
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleInputChange = (e: any) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    const { name, email, subject, message } = formData;
     e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-    // You can add your form submission logic here
-    alert("Thank you for your message! We'll get back to you soon.");
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    try {
+      const response = await apiClient.post(CONTACT_ROUTE, { name, email, subject, message });
+      console.log("Form submitted:", formData);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      toast.success(response.data.user.name + " has successfully sent a message");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error(error.response?.data || error.message);
+    }
   };
 
   return (
@@ -109,7 +113,6 @@ const Contact = () => {
           {/* Contact Form */}
           <div className="bg-slate-800/50 backdrop-blur-xl border border-slate-700/50 rounded-2xl p-8">
             <h2 className="text-2xl font-bold text-white mb-6">Send us a Message</h2>
-
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">

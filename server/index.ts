@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import authRoutes from "./routes/AuthRoutes.ts";
 import profileRoutes from "./routes/ProfileRoutes.ts";
 import { prisma } from "./lib/prisma"; // optional, for DB health check
+import contactRoutes from "./routes/ContactRoutes.ts";
+import searchRoutes from "./routes/searchRoutes.ts";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -26,6 +28,8 @@ app.use(cookieParser());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/profile", profileRoutes);
+app.use("/api/search", searchRoutes);
+app.use("/api/misc", contactRoutes);
 
 app.get("/", async (req, res) => {
   try {

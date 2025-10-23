@@ -208,7 +208,10 @@ const AuthForm = () => {
 
           {/* Social Login */}
           <div className="space-y-3">
-            <button className="w-full bg-slate-700/50 hover:bg-slate-700 border border-slate-600 text-white py-3 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center cursor-pointer">
+            <button
+              className="w-full bg-slate-700/50 hover:bg-slate-700 border border-slate-600 text-white py-3 px-4 rounded-lg font-medium transition-all duration-200 flex items-center justify-center cursor-pointer"
+              title="Click to login with Google"
+            >
               <svg className="w-5 h-5 mr-3" viewBox="0 0 24 24">
                 <path
                   fill="currentColor"

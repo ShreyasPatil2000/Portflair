@@ -19,3 +19,6 @@ export const DELETE_PROJECT_ROUTES = `${PROJECTS_ROUTES}/delete-project`;
 export const SEARCH_ROUTES = "api/search";
 export const SEARCH_USER_ROUTES = `${SEARCH_ROUTES}/user-search`;
 export const SEARCH_PROJECT_ROUTES = `${SEARCH_ROUTES}/project-search`;
+
+export const MISC_ROUTES = "api/misc";
+export const CONTACT_ROUTE = `${MISC_ROUTES}/contact`;
