@@ -5,6 +5,14 @@ import { generateTempToken, generateToken, verifyToken } from "../utils/jwt.ts";
 import nodemailer from "nodemailer";
 import { Request, Response } from "express";
 
+export const googleAuth = async (req: Request, res: Response) => {
+  try {
+  } catch (error) {
+    console.log({ error });
+    return res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 export const signup = async (req: Request, res: Response) => {
   try {
     const { name, email, password } = req.body;

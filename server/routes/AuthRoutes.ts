@@ -7,11 +7,13 @@ import {
   deleteAcccount,
   resetPassword,
   resetForgottenPassword,
+  googleAuth,
 } from "../controllers/AuthController.ts";
 import { authenticateToken } from "../middleware/AuthMiddleware.ts";
 
 const authRoutes = Router();
 
+authRoutes.post("/google-auth", googleAuth);
 authRoutes.post("/signup", signup);
 authRoutes.post("/login", login);
 authRoutes.post("/logout", logout);
